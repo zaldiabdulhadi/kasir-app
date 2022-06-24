@@ -9,7 +9,7 @@ import swal from "sweetalert";
 function App() {
   const [menus, setMenus] = useState([]);
   const [categoryYangDipilih, setCategoryYangDipilih] = useState("Makanan");
-  const [keranjang, setKeranjang] = useState([]);
+  const [keranjang, setKeranjang] = useState({});
 
   useEffect(() => {
     async function getMenus() {
@@ -29,11 +29,11 @@ function App() {
     async function getProduct() {
       const res = await axios.get(API_URL + "products?product.id=" + value.id);
       if (res.data.length === 0) {
-        const keranjang = {
-          jumlah: 1,
-          total_harga: value.harga,
+        setKeranjang({
+          jumlah: res.data[0].jumlah + 1,
+          total_harga: res.data[0].total_harga + value.harga,
           product: value,
-        };
+        });
 
         async function getKeranjang() {
           await axios.post(API_URL + "keranjangs", keranjang);
@@ -46,11 +46,11 @@ function App() {
         }
         getKeranjang();
       } else {
-        const keranjang = {
+        setKeranjang({
           jumlah: res.data[0].jumlah + 1,
           total_harga: res.data[0].total_harga + value.harga,
           product: value,
-        };
+        });
       }
     }
     getProduct();
