@@ -3,13 +3,8 @@ import { numberWithCommas } from "../../utils/utils";
 
 export default function Menus({ menu, masukKeranjang }) {
   return (
-    <Col md={4} xs={6} className="mb-4">
-      <Card
-        className="shadow-sm"
-        onClick={() => {
-          masukKeranjang(menu);
-        }}
-      >
+    <Col md={4} xs={15} className="mb-4">
+      <Card className="shadow-sm" onClick={() => masukKeranjang(menu)}>
         <Card.Img
           variant="top"
           src={

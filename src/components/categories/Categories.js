@@ -8,9 +8,12 @@ import {
   faUtensils,
   faCoffee,
   faCheese,
+  faAlignJustify,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Icon = ({ nama }) => {
+  if (nama === "All")
+    return <FontAwesomeIcon icon={faAlignJustify} className="me-3" />;
   if (nama === "Makanan")
     return <FontAwesomeIcon icon={faUtensils} className="me-3" />;
   if (nama === "Minuman")
@@ -43,7 +46,7 @@ export default function Categories({ changeCategory, categoryYangDipilih }) {
           categories.map((category) => {
             return (
               <ListGroup.Item
-                className={`pointer ${
+                className={`pointer mb-3  ${
                   categoryYangDipilih === category.nama && "category-aktif"
                 }`}
                 key={category.id}
